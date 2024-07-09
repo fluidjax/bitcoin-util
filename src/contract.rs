@@ -1,4 +1,4 @@
-//use crate::bitcoin::p2wpkh_address;
+use crate::bitcoin::p2wpkh_address;
 use std::error::Error;
 use crate::msg::GetP2wpkhAddressResponse;
 use cosmwasm_std::StdError;
@@ -77,9 +77,8 @@ pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
     match msg {
         QueryMsg::GetCount {} => to_json_binary(&query::count(deps)?),
         QueryMsg::GetP2wpkhAddress { public_key } => {
-            //let address = p2wpkh_address(&public_key).map_err(|e| {
-            let address = doit(&public_key).map_err(|e| {
-                StdError::generic_err(format!(
+            let address = p2wpkh_address(&public_key).map_err(|e| {
+                 StdError::generic_err(format!(
                     "Error when trying to compute P2wpkh address: {}",
                     e.to_string()
                 ))
@@ -90,9 +89,6 @@ pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
 }
 
 
- pub fn doit(public_key: &String) -> Result<String, Box<dyn Error>> {
-     Ok("hello".to_string())
- }
 
 pub mod query {
     use super::*;
