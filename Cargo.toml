@@ -45,7 +45,8 @@ serde = { version = "1.0.197", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.58" }
 hex = "0.4.3"
 rand = "0.9.0-alpha.1"
-bitcoin = { version = "0.32.2", features = ["rand-std"] }
+#bitcoin = {  version="0.32.2", features = ["rand-std"] }
+bitcoin_arch_v2 = {  path = "bitcoin-k256/bitcoin"}
 
 [dev-dependencies]
 cw-multi-test = "2.0.0"
